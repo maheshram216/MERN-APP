@@ -46,7 +46,7 @@ router.post('/register',
 
             if (password != cpassword) {
                 return res.status(400).json({
-                    status: "Fialed",
+                    status: "Failed",
                     message: "passowrd not match"
                 });
             }

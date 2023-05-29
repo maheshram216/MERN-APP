@@ -6,7 +6,9 @@ const userRoute = require('./routes/userRoute');
 const postRoute = require('./routes/postRoute');
 var jwt = require('jsonwebtoken');
 const secret = 'secret';
+var cors = require('cors');
 
+app.use(cors());
 
 dotenv.config({ path: "./config.env" });
 
