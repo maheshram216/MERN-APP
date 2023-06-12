@@ -1,10 +1,16 @@
-.nav-bar{
-  margin: 20px;
-  list-style-type: none;
+.linav {
+  display: inline;
+  margin-right: 100px;
+
+  text-decoration: none;
+
 }
 
-.linav{
-  display: inline;
-  margin: 20px;
-  text-decoration: none;
+.content {
+  margin-left: 500px;
+  padding-top: 50px;
+}
+
+.text {
+  margin-top: 10px;
 }

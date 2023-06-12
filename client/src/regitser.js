@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import './App.css';
 
 const Register = () => {
 
@@ -31,7 +32,7 @@ const Register = () => {
 
         const data = await res.json();
 
-        if (data.errors) {
+        if (data.errors ) {
             alert("Enter all fields");
         } else {
             console.log(data);
@@ -42,15 +43,20 @@ const Register = () => {
             alert("user exist");
             navigate('/register');
         };
+
+        if (data.message === "passowrd not match") {
+            alert("passowrd not match");
+            navigate('/register');
+        };
     };
 
     return (
-        <div>
+        <div className='content'>
             <form>
                 <h1>Signup</h1>
                 <div>
                     <label>name: </label>
-                    <input value={user.name} onChange={handleInputs} id="name" type="text" name="name" placeholder="Enter name"></input>
+                    <input required value={user.name} onChange={handleInputs} id="name" type="text" name="name" placeholder="Enter name"></input>
                 </div>
                 <div>
                     <label>email: </label>

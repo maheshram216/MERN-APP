@@ -1,10 +1,14 @@
+const dotenv = require('dotenv');
 const express = require('express');
 const router = express.Router();
 const userSchema = require('../model/userModel');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
-const secret = 'secret';
+
+dotenv.config({ path: "./config.env" });
+
+SECRET = process.env.SECRET
 
 router.get('/', async (req, res) => {
     try {
@@ -102,10 +106,10 @@ router.post('/login', body('email').isEmail(), async (req, res) => {
         // console.log(user);
         // Load hash from your password DB.
 
-        bcrypt.compare(password, user.password, function (err, result) {
+        bcrypt.compare(password, user.password, async function (err, result) {
             // result == true
             if (err) {
-                res.status(404).json({
+                res.status(400).json({
                     status: 'Failed',
                     message: err.message
                 });
@@ -113,19 +117,30 @@ router.post('/login', body('email').isEmail(), async (req, res) => {
             if (result) {
                 const token = jwt.sign({
                     data: user._id
-                }, secret, { expiresIn: '1h' });
+                }, SECRET, { expiresIn: '1h' });
+
+                // const tokenJ = await user.generateToken();
+                // console.log(tokenJ)
+
+                // res.cookie("jwtoken", tokenJ,{
+                //     expires:new Date(Date.now() + 25892000000),
+                //     httpOnly: true
+                // });
 
                 res.status(200).json({
                     status: 'Success',
                     message: 'Login Successful',
                     token
                 });
+
             } else {
                 res.status(400).json({
                     status: 'Password Enterd Wrong',
                 });
             };
         });
+
+
 
     } catch (error) {
         res.status(400).json({

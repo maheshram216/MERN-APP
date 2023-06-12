@@ -23,7 +23,7 @@ route.get('/', async (req, res) => {
     try {
         // const { pages } = req.query
         const data = await postSchema.find({ user: req.user });
-        console.log(data);
+        // console.log(data);
         res.status(200).json({
             status: "Success",
             data
@@ -73,7 +73,7 @@ route.put('/update/:id', async (req, res) => {
 
 route.delete("/delete/:id", async (req, res) => {
     console.log("Inside delete");
-    console.log(req.body);
+    // console.log(req.body);
 
     try {
         const data = await postSchema.deleteOne({ _id: req.params.id });
